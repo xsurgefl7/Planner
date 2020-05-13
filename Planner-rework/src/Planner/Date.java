@@ -148,11 +148,11 @@ for(int i = 0; EventNum > i; EventNum--){
 
 
 version++;
-EventUpdated[version] = "\n"+ Event + "\n" + Titlein + "\n" + Localbot + "v" + version;  //Saving Event Title and location in array with version
+EventUpdated[version] = "\n" + "Event Number: " + version+ "\n" + "Date: " + Event + "\n" + "Title: " + Titlein + "\n" + "Location: " + Localbot + "\n"; //Saving Event Title and location in array with version
 
 if (ReminderDin != "null") {                                                            //saving reminder in its own array with version
 	version2++;
-	ReminderUpdated[version2] = ReminderDin + "v" + version2;
+	ReminderUpdated[version2] ="\n" + "Reminder Number: " + version2 + "\n" +  "Reminder: " +  ReminderDin + "\n";
 	
 }
 else if (ReminderWin != "null") {
@@ -171,8 +171,17 @@ else if (ReminderYin != "null") {
 	
 }
 }
+	  EventUpdated = Arrays.stream(EventUpdated)
+         .filter(s -> (s != null && s.length() > 0))
+         .toArray(String[]::new);  
+System.out.println("\n"+ Arrays.toString(EventUpdated));
 
-System.out.println(Arrays.toString(ReminderUpdated));  //Test
+
+
+	  ReminderUpdated = Arrays.stream(ReminderUpdated)
+		         .filter(s -> (s != null && s.length() > 0))
+		         .toArray(String[]::new);  
+	  System.out.println("\n" + Arrays.toString(ReminderUpdated));
 keyboard.close();
 }
 
