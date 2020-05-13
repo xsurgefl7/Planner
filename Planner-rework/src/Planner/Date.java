@@ -173,15 +173,15 @@ else if (ReminderYin != "null") {
 }
 	  EventUpdated = Arrays.stream(EventUpdated)
          .filter(s -> (s != null && s.length() > 0))
-         .toArray(String[]::new);  
-System.out.println("\n"+ Arrays.toString(EventUpdated));
+         .toArray(String[]::new);
+System.out.println("\n"+ Arrays.toString(EventUpdated).replace("[", "").replace("]", "").replace(",", ""));
 
 
 
 	  ReminderUpdated = Arrays.stream(ReminderUpdated)
 		         .filter(s -> (s != null && s.length() > 0))
 		         .toArray(String[]::new);  
-	  System.out.println("\n" + Arrays.toString(ReminderUpdated));
+	  System.out.println("\n" + Arrays.toString(ReminderUpdated).replace("[", "").replace("]", "").replace(",", ""));
 keyboard.close();
 }
 
