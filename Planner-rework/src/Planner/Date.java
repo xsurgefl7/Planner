@@ -67,7 +67,7 @@ for(int i = 0; EventNum > i; EventNum--){
 		Localbot = keyboard.nextLine();
 
 
-
+		yn = true;
 		LocalDate localDateR = LocalDate.now();
 		System.out.println("Would you like a reminder?");
 		answer = keyboard.nextLine();
