@@ -13,7 +13,6 @@ String Event;
 String inputString;
 String Inputdays;
 int version=0;
-int version2=0;
 int EventIncr = 0;
 String InputNum;
 int Days =0;
@@ -28,6 +27,8 @@ String ReminderDin = "null", ReminderWin = "null",ReminderMin = "null",ReminderY
 String[] EventUpdated = new String[ArrayNum]; //Array Holding Each Event Date, title and location by version 
 String[] ReminderUpdated = new String[ArrayNum]; //Array Holding Each reminder by version
 String priority = "null"; 
+String answer;
+boolean yn = true;
 
 
 
@@ -68,23 +69,36 @@ for(int i = 0; EventNum > i; EventNum--){
 
 
 		LocalDate localDateR = LocalDate.now();
-		
-		if (priority.equalsIgnoreCase("high") || priority.equalsIgnoreCase("med")) {
+		System.out.println("Would you like a reminder?");
+		answer = keyboard.nextLine();
+		if(answer.equalsIgnoreCase("yes")) {
+		yn = true;}
+		else if(answer.equalsIgnoreCase("no")) {
+		yn = false;
+		System.out.println( "No reminder set for "+ Titlein + " Event located at " + Localbot + " on "  + Event + " Status Priority: " + priority );
+		}
+
+		if (priority.equalsIgnoreCase("high") || priority.equalsIgnoreCase("med") || priority.equalsIgnoreCase("low")) {
+			if (yn == true) {
 		System.out.println("Enter in how many days you need your reminder: ");
 		Inputdays = keyboard.nextLine();
 		Days = Integer.parseInt(Inputdays);
+			}
 		}
 		else {}
 
 
 	if(Days <= 6) { //Days
 		
-		if(priority.equalsIgnoreCase("high") || priority.equalsIgnoreCase("med")) {
-		ReminderD = localDateR.plusDays(Days);
-		System.out.println("Enter Your reminder notification message: ");
-		ReminderDin = keyboard.nextLine();
-		System.out.println( "Setting reminder for "+ Titlein + " Event located at " + Localbot + " on "  + ReminderD);
+		if(priority.equalsIgnoreCase("high") || priority.equalsIgnoreCase("med") || priority.equalsIgnoreCase("low")) {
+			if (yn == true) {
+			ReminderD = localDateR.plusDays(Days);
+			System.out.println("Enter Your reminder notification message: ");
+			ReminderDin = keyboard.nextLine();
+			System.out.println( "Setting reminder for "+ Titlein + " Event located at " + Localbot + " on "  + ReminderD+ " Status Priority: " + priority);
 		//System.out.println("Reminder set for: "+ Days + " Days " + "\n"+ "The Date of your reminder is: " + ReminderD);
+			}
+			else {}
 		}
 		else {
 			System.out.println("Event Created.");
@@ -94,15 +108,18 @@ for(int i = 0; EventNum > i; EventNum--){
 
 	else if(Days >= 7 && Days <= 29 ) { //Weeks
 
-		if(priority.equalsIgnoreCase("high") || priority.equalsIgnoreCase("med")) {
+		if(priority.equalsIgnoreCase("high") || priority.equalsIgnoreCase("med") || priority.equalsIgnoreCase("low")) {
+		if (yn == true) {
 		System.out.println("Enter Your reminder notification message: ");
 		ReminderWin = keyboard.nextLine();
 		Modulo = Days%7;
 		Days = Days/7;
 		System.out.println("Reminder set for: " + Days + " Weeks " + " And " + Modulo + " Days ");
 		ReminderW = localDateR.plusWeeks(Days).plusDays(Modulo);
-		System.out.println( "Setting reminder for "+ Titlein + " Event located at " + Localbot + " on "  + ReminderW);
+		System.out.println( "Setting reminder for "+ Titlein + " Event located at " + Localbot + " on "  + ReminderW+ " Status Priority: " + priority);
 		//System.out.println( "The Date of your reminder is: " + ReminderW);
+		}
+		else {}
 		}
 		else {
 			System.out.println("Event Created.");
@@ -112,14 +129,17 @@ for(int i = 0; EventNum > i; EventNum--){
 
 	else if(Days >= 30 && Days <= 364) {  //Months
 
-		if(priority.equalsIgnoreCase("high") || priority.equalsIgnoreCase("med")) {
+		if(priority.equalsIgnoreCase("high") || priority.equalsIgnoreCase("med") || priority.equalsIgnoreCase("low")) {
+		if (yn == true) {
 		System.out.println("Enter Your reminder notification message: ");
 		ReminderMin = keyboard.nextLine();
 		Modulo = Days%30;
 		Days = Days/30;
 		System.out.println("Reminder set for: " + Days + " Months " + " And " + Modulo + " Days ");
 		ReminderM= localDateR.plusMonths(Days).plusDays(Modulo);
-		System.out.println( "Setting reminder for "+ Titlein + " Event located at " + Localbot + " on "  + ReminderM);
+		System.out.println( "Setting reminder for "+ Titlein + " Event located at " + Localbot + " on "  + ReminderM+ " Status Priority: " + priority);
+		}
+		else {}
 		}
 		else {
 			System.out.println("Event Created.");
@@ -129,15 +149,18 @@ for(int i = 0; EventNum > i; EventNum--){
 
 	else if(Days >= 365) { //Years
 
-		if(priority.equalsIgnoreCase("high") || priority.equalsIgnoreCase("med")) {
+		if(priority.equalsIgnoreCase("high") || priority.equalsIgnoreCase("med") || priority.equalsIgnoreCase("low")) {
+			if (yn == true) {
 		System.out.println("Enter Your reminder notification message: ");
 		ReminderYin = keyboard.nextLine();
 		Modulo = Days%365;
 		Days = Days/365;
 		System.out.println("Reminder set for: " + Days + " Years " + " And " + Modulo + " Days ");
 		ReminderY = localDateR.plusYears(Days).plusDays(Modulo);
-		System.out.println( "Setting reminder for "+ Titlein + " Event located at " + Localbot + " on "  + ReminderY);
+		System.out.println( "Setting reminder for "+ Titlein + " Event located at " + Localbot + " on "  + ReminderY+ " Status Priority: " + priority);
 		//System.out.println( "The Date of your reminder is: " + ReminderY);
+			}
+			else {}
 		}
 		else {
 			System.out.println("Event Created.");
@@ -150,44 +173,45 @@ for(int i = 0; EventNum > i; EventNum--){
 version++;
 EventUpdated[version] = "\n" + "Event Number: " + version+ "\n" + "Date: " + Event + "\n" + "Title: " + Titlein + "\n" + "Location: " + Localbot + "\n"; //Saving Event Title and location in array with version
 
+
 if (ReminderDin != "null") {                                                            //saving reminder in its own array with version
-	version2++;
-	ReminderUpdated[version2] ="\n" + "Reminder Number: " + version2 + "\n" +  "Reminder: " +  ReminderDin + "\n";
+	ReminderUpdated[version] ="\n" + "Reminder Number: " + version + "\n" +  "Reminder: " +  ReminderDin + "\n";
 	
 }
 else if (ReminderWin != "null") {
-	version2++;
-	ReminderUpdated[version2] = ReminderWin + "v" + version2;
+	ReminderUpdated[version] = "\n" + "Reminder Number: " + version + "\n" +  "Reminder: " +  ReminderWin + "\n";
 	
 }
 else if (ReminderMin != "null") {
-	version2++;
-	ReminderUpdated[version2] = ReminderMin + "v" + version2;
+
+	ReminderUpdated[version] = "\n" + "Reminder Number: " + version + "\n" +  "Reminder: " +  ReminderMin + "\n";
 	
 }
 else if (ReminderYin != "null") {
-	version2++;
-	ReminderUpdated[version2] = ReminderYin + "v" + version2;
+	ReminderUpdated[version] = "\n" + "Reminder Number: " + version + "\n" +  "Reminder: " +  ReminderYin + "\n";
 	
+
 }
+
 }
-	  EventUpdated = Arrays.stream(EventUpdated)
-         .filter(s -> (s != null && s.length() > 0))
-         .toArray(String[]::new);
+	  
+
+EventUpdated = Arrays.stream(EventUpdated)
+.filter(s -> (s != null) && s.length() > 0)
+.toArray(String[]::new);
 System.out.println("\n"+ Arrays.toString(EventUpdated).replace("[", "").replace("]", "").replace(",", ""));
 
 
-
-	  ReminderUpdated = Arrays.stream(ReminderUpdated)
-		         .filter(s -> (s != null && s.length() > 0))
-		         .toArray(String[]::new);  
-	  System.out.println("\n" + Arrays.toString(ReminderUpdated).replace("[", "").replace("]", "").replace(",", ""));
+if (yn == true) {
+  ReminderUpdated = Arrays.stream(ReminderUpdated)
+	         .filter(s -> (s != null && s.length() > 0))
+	         .toArray(String[]::new);  
+ System.out.println("\n" + Arrays.toString(ReminderUpdated).replace("[", "").replace("]", "").replace(",", ""));
+}
 keyboard.close();
 }
 
 }
-
-
 
 	
 
